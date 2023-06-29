@@ -5,36 +5,38 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [xNum, setXNum] = useState(100)
-  const [yNum, setYNum] = useState(100)
+  const [xNum, setXNum] = useState(1)
+  const [yNum, setYNum] = useState(1)
   const y = { marginTop: `${yNum}px` }
   const x = { marginInline: `${xNum}px` }
   const object = <div className="object" style={Object.assign({}, x, y)}></div>
 
+  const toMoveNeg = (param) => {
+    if(param <= 0) return param = 1;
+    if(param >= 85) return param = 80;
+    return param - 10;
+  }
+  const toMovePos = (param) => {
+    if(param <= 0) return param = 1;
+    if(param >= 85) return param = 80
+    return param + 10;
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
       </div>
-      <div id="container">box
+      <div id="container">
       <div>{object}</div>
       </div>
       <div> 
-        <button onClick={()=> setYNum((yNum)=> yNum - 10)}>UP</button>
-        <button onClick={()=> setYNum((yNum)=> yNum + 10)}>DOWN</button>
-        <button onClick={()=> setXNum((xNum)=> xNum - 10)}>LEFT</button>
-        <button onClick={()=> setXNum((xNum)=> xNum + 10)}>RIGHT</button>
+        <button onClick={()=> setYNum(toMoveNeg(yNum))}>UP</button>
+        <button onClick={()=> setYNum(toMovePos(yNum))}>DOWN</button>
+        <button onClick={()=> setXNum(toMoveNeg(xNum))}>LEFT</button>
+        <button onClick={()=> setXNum(toMovePos(xNum))}>RIGHT</button>
       </div>
     </>
   )
